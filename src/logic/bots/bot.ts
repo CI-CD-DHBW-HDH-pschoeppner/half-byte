@@ -1,4 +1,4 @@
-import { Field, getBlanks, isPlayer, Mode } from "../game";
+import { Field, getBlanks, isPlayer, Mode, winningPatterns } from "../game";
 import { easyMove } from "./easy";
 import { hardMove } from "./hard";
 import { mediumMove, pettyMove } from "./medium";
@@ -29,18 +29,7 @@ export function moveWithMode(mode: Mode): BotMove | undefined {
 export function winningMove(board: Field[], player: Field): number {
   if (!isPlayer(player)) throw new Error(`Player ${player} is not valid`);
 
-  const winPatterns = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8], // horizontal lines
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8], // vertical lines
-    [0, 4, 8],
-    [2, 4, 6], // diagonals
-  ];
-
-  for (const pattern of winPatterns) {
+  for (const pattern of winningPatterns) {
     // number of fields the player occupies for the current win pattern
     const numPlayerFields = pattern.filter((i) => board[i] === player).length;
     // number of empty fields for the current win pattern
