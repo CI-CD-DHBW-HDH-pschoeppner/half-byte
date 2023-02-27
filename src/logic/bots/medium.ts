@@ -25,6 +25,9 @@ export function pettyMove(board: Field[], own: Field): number {
   if (own === Field.EMPTY) return -1;
 
   const otherPlayer = own === Field.PLAYER1 ? Field.PLAYER2 : Field.PLAYER1;
+  const otherMoveWinning = winningMove(board, otherPlayer);
 
-  return winningMove(board, otherPlayer);
+  if (otherMoveWinning !== -1) return otherMoveWinning;
+
+  return randomMove(board);
 }
