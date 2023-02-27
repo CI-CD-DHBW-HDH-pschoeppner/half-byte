@@ -1,4 +1,4 @@
-import {Field, isPlayer, Mode} from "../game";
+import {Field, getBlanks, isPlayer, Mode} from "../game";
 import {easyMove} from "./easy";
 import {hardMove} from "./hard";
 import {mediumMove, pettyMove} from "./medium";
@@ -49,10 +49,15 @@ export function winningMove(board: Field[], player: Field): number {
         }
     }
 
-    // Wenn der Spieler keine Möglichkeit hat, im nächsten Zug zu gewinnen, gibt es keinen Gewinnzug.
     return -1;
 }
 
-export function randomMove(bounds: number): number {
-    return Math.floor(Math.random() * bounds);
+export function randomMove(board: Field[]): number {
+    const emptyFields = getBlanks(board);
+
+    if (emptyFields.length === 0) return -1;
+
+    const randomMoveIndex = Math.floor(Math.random() * emptyFields.length);
+
+    return emptyFields[randomMoveIndex];
 }

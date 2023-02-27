@@ -1,4 +1,5 @@
-import type { Field } from "../game";
+import {Field} from "../game";
+import {randomMove, winningMove} from "./bot";
 
 // the medium bot:
 // - chooses the winning move, if it can win
@@ -6,7 +7,15 @@ import type { Field } from "../game";
 // - chooses the middle (4) field, if it can
 // - chooses a random move otherwise
 export function mediumMove(board: Field[], own: Field): number {
-  return -1 // TODO: implement
+  const nextMoveWinning = winningMove(board, own);
+  if (nextMoveWinning !== -1) return nextMoveWinning;
+
+  const nextMovePetty = pettyMove(board, own);
+  if (nextMovePetty !== -1) return nextMovePetty;
+
+  if (board[4] === Field.EMPTY) return 4;
+
+  return randomMove(board);
 }
 
 // this bot:
