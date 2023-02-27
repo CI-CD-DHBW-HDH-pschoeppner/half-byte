@@ -62,7 +62,7 @@ export class Game {
     this.enemy.botMove = moveWithMode(this.mode);
   }
 
-  // score a win for the given player 
+  // score a win for the given player
   addWin(player: Field) {
     switch (player) {
       case Field.PLAYER1:
@@ -121,7 +121,7 @@ export function isFull(board: Field[]): boolean {
 export function won(board: Field[]): Field {
   for (const player of [Field.PLAYER1, Field.PLAYER2]) {
     if (
-      false // TODO: implement
+        checkPlayerWon(board, player)
     )
       return player;
   }
@@ -161,4 +161,20 @@ export function invertPlayer(player: Field): Field {
 // isPlayer tests, that player is either Field.PLAYER1 or Field.PLAYER2
 export function isPlayer(player: Field): boolean {
   return player === Field.PLAYER1 || player === Field.PLAYER2;
+}
+
+export function checkPlayerWon(board: Field[], player: number): boolean {
+  // horizontal
+  if (board[0] == player && board[1] == player && board[2] == player) {return true }
+  if (board[3] == player && board[4] == player && board[5] == player) {return true }
+  if (board[6] == player && board[7] == player && board[8] == player) {return true }
+  // diagonal
+  if (board[0] == player && board[4] == player && board[8] == player) {return true }
+  if (board[2] == player && board[4] == player && board[6] == player) {return true }
+  // vertical
+  if (board[0] == player && board[3] == player && board[6] == player) {return true }
+  if (board[1] == player && board[4] == player && board[7] == player) {return true }
+  if (board[2] == player && board[5] == player && board[8] == player) {return true }
+
+  return false
 }
