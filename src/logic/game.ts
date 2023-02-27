@@ -113,7 +113,7 @@ export class Outcome {
 
 // isFull tests, if there are any blank spaces are left
 export function isFull(board: Field[]): boolean {
-  return !board.some((field) => field === Field.EMPTY);
+  return board.every((field) => field !== Field.EMPTY);
 }
 
 // won tests, if either player has won the game
