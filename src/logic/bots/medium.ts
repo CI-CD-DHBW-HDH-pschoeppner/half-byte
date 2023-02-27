@@ -7,27 +7,27 @@ import {randomMove, winningMove} from "./bot";
 // - chooses the middle (4) field, if it can
 // - chooses a random move otherwise
 export function mediumMove(board: Field[], own: Field): number {
-  const nextMoveWinning = winningMove(board, own);
-  if (nextMoveWinning !== -1) return nextMoveWinning;
+    const nextMoveWinning = winningMove(board, own);
+    if (nextMoveWinning !== -1) return nextMoveWinning;
 
-  const nextMovePetty = pettyMove(board, own);
-  if (nextMovePetty !== -1) return nextMovePetty;
+    const nextMovePetty = pettyMove(board, own);
+    if (nextMovePetty !== -1) return nextMovePetty;
 
-  if (board[4] === Field.EMPTY) return 4;
+    if (board[4] === Field.EMPTY) return 4;
 
-  return randomMove(board);
+    return randomMove(board);
 }
 
 // this bot:
 // - blocks the player from winning, if it can
 // - chooses a random move otherwise
 export function pettyMove(board: Field[], own: Field): number {
-  if (own === Field.EMPTY) return -1;
+    if (own === Field.EMPTY) return -1;
 
-  const otherPlayer = own === Field.PLAYER1 ? Field.PLAYER2 : Field.PLAYER1;
-  const otherMoveWinning = winningMove(board, otherPlayer);
+    const otherPlayer = own === Field.PLAYER1 ? Field.PLAYER2 : Field.PLAYER1;
+    const otherMoveWinning = winningMove(board, otherPlayer);
 
-  if (otherMoveWinning !== -1) return otherMoveWinning;
+    if (otherMoveWinning !== -1) return otherMoveWinning;
 
-  return randomMove(board);
+    return randomMove(board);
 }
