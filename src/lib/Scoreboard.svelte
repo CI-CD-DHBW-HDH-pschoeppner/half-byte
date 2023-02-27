@@ -1,4 +1,3 @@
-#
 <script lang="ts">
     import {createEventDispatcher} from "svelte";
     import type {Player} from "../logic/game";
@@ -15,15 +14,13 @@
 
 <div id="scoreboard">
     <div id="player1" class="player">
-        <i
-        >
+        <i>
             {#if player.isHuman()}
                 👨‍💻
             {:else}
                 🤖
             {/if}
-        </i
-        >
+        </i>
         {player.score}
     </div>
     <div id="versus" on:click={() => toggle()} on:keydown={() => toggle()}>
@@ -31,15 +28,13 @@
     </div>
     <div id="player2" class="player">
         {enemy.score}
-        <i
-        >
+        <i>
             {#if enemy.isHuman()}
                 👨‍💻
             {:else}
                 🤖
             {/if}
-        </i
-        >
+        </i>
     </div>
 </div>
 
