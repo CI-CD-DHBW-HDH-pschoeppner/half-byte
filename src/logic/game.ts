@@ -194,19 +194,3 @@ export function checkPlayerWon(board: Field[], player: number): boolean {
 
     return false
 }
-
-export function checkPlayerWon(board: Field[], player: number): boolean {
-  // horizontal
-  if (board[0] == player && board[1] == player && board[2] == player) {return true }
-  if (board[3] == player && board[4] == player && board[5] == player) {return true }
-  if (board[6] == player && board[7] == player && board[8] == player) {return true }
-  // diagonal
-  if (board[0] == player && board[4] == player && board[8] == player) {return true }
-  if (board[2] == player && board[4] == player && board[6] == player) {return true }
-  // vertical
-  if (board[0] == player && board[3] == player && board[6] == player) {return true }
-  if (board[1] == player && board[4] == player && board[7] == player) {return true }
-  if (board[2] == player && board[5] == player && board[8] == player) {return true }
-
-  return false
-}
