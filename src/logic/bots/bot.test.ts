@@ -60,6 +60,22 @@ describe("randomMove()", () => {
 });
 
 describe("winningMove()", () => {
+  it("throws an exception if the player is not valid", () => {
+    const board = [
+      Field.EMPTY,
+      Field.EMPTY,
+      Field.EMPTY,
+      Field.EMPTY,
+      Field.EMPTY,
+      Field.EMPTY,
+      Field.EMPTY,
+      Field.EMPTY,
+      Field.EMPTY,
+    ];
+    const invalidPlayer = Field.EMPTY;
+
+    expect(() => winningMove(board, invalidPlayer)).toThrow(new Error("Player 0 is not valid"));
+  });
   it("returns -1 if all fields are empty", () => {
     const board = [
       Field.EMPTY,

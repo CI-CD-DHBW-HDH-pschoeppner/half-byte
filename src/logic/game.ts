@@ -113,7 +113,7 @@ export class Outcome {
 
 // isFull tests, if there are any blank spaces are left
 export function isFull(board: Field[]): boolean {
-  return !board.some((field) => field === Field.EMPTY);
+  return board.every((field) => field !== Field.EMPTY);
 }
 
 // won tests, if either player has won the game
@@ -125,12 +125,12 @@ export function won(board: Field[]): Field {
   return Field.EMPTY;
 }
 
+// newBoard returns a new, empty Array of Fields with length 9
 export function newBoard(): Field[] {
   const board = new Array<Field>(9);
   board.fill(Field.EMPTY);
   return board;
 }
-// newBoard returns a new, empty Array of Fields with length 9
 
 // getBlanks returns the indices of all empty fields in a given board
 export function getBlanks(board: Field[]): number[] {
@@ -141,7 +141,7 @@ export function getBlanks(board: Field[]): number[] {
         if (field !== Field.EMPTY) return -1;
         return index;
       })
-      // than, filter out all -1 values
+      // then, filter out all -1 values
       .filter((value) => {
         return value >= 0;
       })
@@ -163,33 +163,21 @@ export function isPlayer(player: Field): boolean {
 }
 
 function checkPlayerWon(board: Field[], player: number): boolean {
-  // horizontal
-  if (board[0] === player && board[1] === player && board[2] === player) {
-    return true;
-  }
-  if (board[3] === player && board[4] === player && board[5] === player) {
-    return true;
-  }
-  if (board[6] === player && board[7] === player && board[8] === player) {
-    return true;
-  }
-  // diagonal
-  if (board[0] === player && board[4] === player && board[8] === player) {
-    return true;
-  }
-  if (board[2] === player && board[4] === player && board[6] === player) {
-    return true;
-  }
-  // vertical
-  if (board[0] === player && board[3] === player && board[6] === player) {
-    return true;
-  }
-  if (board[1] === player && board[4] === player && board[7] === player) {
-    return true;
-  }
-  if (board[2] === player && board[5] === player && board[8] === player) {
-    return true;
-  }
-
-  return false;
+  return winningPatterns.some((pattern) => {
+    pattern.every((field) => field === player);
+  });
 }
+
+export const winningPatterns = [
+  // horizontal lines
+  [0, 1, 2],
+  [3, 4, 5],
+  [6, 7, 8],
+  // vertical lines
+  [0, 3, 6],
+  [1, 4, 7],
+  [2, 5, 8],
+  // diagonals
+  [0, 4, 8],
+  [2, 4, 6],
+];
