@@ -128,12 +128,12 @@ export function won(board: Field[]): Field {
     return Field.EMPTY;
 }
 
-// newBoard returns a new, empty Array of Fields with length 9
 export function newBoard(): Field[] {
     const board = new Array<Field>(9);
     board.fill(Field.EMPTY);
     return board;
 }
+// newBoard returns a new, empty Array of Fields with length 9
 
 // getBlanks returns the indices of all empty fields in a given board
 export function getBlanks(board: Field[]): number[] {
@@ -163,7 +163,7 @@ export function isPlayer(player: Field): boolean {
     return player === Field.PLAYER1 || player === Field.PLAYER2;
 }
 
-export function checkPlayerWon(board: Field[], player: number): boolean {
+function checkPlayerWon(board: Field[], player: number): boolean {
     // horizontal
     if (board[0] === player && board[1] === player && board[2] === player) {
         return true
