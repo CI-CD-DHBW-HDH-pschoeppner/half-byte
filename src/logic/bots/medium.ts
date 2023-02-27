@@ -10,8 +10,9 @@ export function mediumMove(board: Field[], own: Field): number {
     const nextMoveWinning = winningMove(board, own);
     if (nextMoveWinning !== -1) return nextMoveWinning;
 
-    const nextMovePetty = pettyMove(board, own);
-    if (nextMovePetty !== -1) return nextMovePetty;
+    const otherPlayer = own === Field.PLAYER1 ? Field.PLAYER2 : Field.PLAYER1;
+    const otherMoveWinning = winningMove(board, otherPlayer);
+    if (otherMoveWinning !== -1) return otherMoveWinning;
 
     if (board[4] === Field.EMPTY) return 4;
 
