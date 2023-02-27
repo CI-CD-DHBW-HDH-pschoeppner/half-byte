@@ -22,5 +22,9 @@ export function mediumMove(board: Field[], own: Field): number {
 // - blocks the player from winning, if it can
 // - chooses a random move otherwise
 export function pettyMove(board: Field[], own: Field): number {
-  return -1 // TODO: implement
+  if (own === Field.EMPTY) return -1;
+
+  const otherPlayer = own === Field.PLAYER1 ? Field.PLAYER2 : Field.PLAYER1;
+
+  return winningMove(board, otherPlayer);
 }
