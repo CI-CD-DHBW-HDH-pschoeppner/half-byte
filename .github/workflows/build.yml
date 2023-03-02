@@ -1,9 +1,29 @@
-name: GitHub Actions Demo
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+name: CI
 on: [ push, workflow_dispatch ]
 
+env:
+  NODE_VERSION: 18.14.2
+
 jobs:
-  Explore-GitHub-Actions:
+  ci:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ NODE_VERSION }}
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Lint
+        run: npm lint
+
+      - name: Test
+        run: npm test
+
+      - name: Build
+        run: npm build
