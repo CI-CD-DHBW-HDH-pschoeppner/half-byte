@@ -10,7 +10,7 @@ env:
   NODE_VERSION: 18.14.2
 
 jobs:
-  build-test-and-deploy:
+  build-test-and-push:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
@@ -52,6 +52,6 @@ jobs:
         with:
           context: .
           push: true
-          tags: ghcr.io/ci-cd-dhbw-hdh-pschoeppner/half-byte:dev
+          tags: ghcr.io/ci-cd-dhbw-hdh-pschoeppner/half-byte/half-byte-tic-tac-toe:dev
           username: ${{ github.repository_owner }}
           token: ${{ secrets.GITHUB_TOKEN }}
