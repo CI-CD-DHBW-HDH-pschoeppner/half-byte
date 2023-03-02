@@ -74,7 +74,9 @@ describe("winningMove()", () => {
     ];
     const invalidPlayer = Field.EMPTY;
 
-    expect(() => winningMove(board, invalidPlayer)).toThrow(new Error("Player 0 is not valid"));
+    expect(() => winningMove(board, invalidPlayer)).toThrow(
+      new Error("Player 0 is not valid")
+    );
   });
   it("returns -1 if all fields are empty", () => {
     const board = [
