@@ -6,6 +6,9 @@ on:
     # so this workflow runs only on a merged Pull Request
     branches: [ main, dev ]
 
+permissions:
+  packages: write
+
 env:
   NODE_VERSION: 18.14.2
 
@@ -53,5 +56,3 @@ jobs:
           context: .
           push: true
           tags: ghcr.io/ci-cd-dhbw-hdh-pschoeppner/half-byte/half-byte-tic-tac-toe:dev
-          username: ${{ github.repository_owner }}
-          token: ${{ secrets.GITHUB_TOKEN }}
