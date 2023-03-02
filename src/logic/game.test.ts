@@ -6,7 +6,7 @@ import {
   isPlayer,
   Mode,
   newBoard,
-  Player,
+  Player, won,
 } from "./game";
 
 describe("invert player", () => {
@@ -80,6 +80,26 @@ describe("is player human", () => {
   });
 });
 
+describe("games update mode", () => {
+  it("update to medium", () => {
+    const player1: Player = new Player(Field.PLAYER1);
+    const player2: Player = new Player(Field.PLAYER2);
+    const game: Game = new Game(player1, player2);
+    game.updateMode(Mode.MEDIUM);
+    expect(game.mode).toBe(Mode.MEDIUM);
+  });
+  it("update to easy", () => {
+    const player1: Player = new Player(Field.PLAYER1);
+    const player2: Player = new Player(Field.PLAYER2);
+    const game: Game = new Game(player1, player2);
+    expect(game.mode).toBe(Mode.EASY);
+    game.updateMode(Mode.HARD);
+    expect(game.mode).toBe(Mode.HARD);
+    game.updateMode(Mode.EASY);
+    expect(game.mode).toBe(Mode.EASY);
+  });
+});
+
 describe("player move", () => {
   it("check if player 1 moves", () => {
     const humanPlayer: Player = new Player(Field.PLAYER1);
@@ -121,22 +141,26 @@ describe("games switch sides", () => {
   });
 });
 
-describe("games update mode", () => {
-  it("update to medium", () => {
-    const player1: Player = new Player(Field.PLAYER1);
-    const player2: Player = new Player(Field.PLAYER2);
-    const game: Game = new Game(player1, player2);
-    game.updateMode(Mode.MEDIUM);
-    expect(game.mode).toBe(Mode.MEDIUM);
+describe("check won function", () => {
+  it("player 1 wins", () => {
+    const board: Field[] = newBoard()
+    board[1] = Field.PLAYER1
+    board[4] = Field.PLAYER1
+    board[7] = Field.PLAYER1
+    expect(won(board)).toBe(Field.PLAYER1)
   });
-  it("update to easy", () => {
-    const player1: Player = new Player(Field.PLAYER1);
-    const player2: Player = new Player(Field.PLAYER2);
-    const game: Game = new Game(player1, player2);
-    expect(game.mode).toBe(Mode.EASY);
-    game.updateMode(Mode.HARD);
-    expect(game.mode).toBe(Mode.HARD);
-    game.updateMode(Mode.EASY);
-    expect(game.mode).toBe(Mode.EASY);
+  it("no win", () => {
+    const board: Field[] = newBoard()
+    board[1] = Field.PLAYER1
+    board[2] = Field.PLAYER1
+    board[6] = Field.PLAYER1
+    expect(won(board)).toBe(Field.EMPTY)
+  });
+  it("player 2 wins", () => {
+    const board: Field[] = newBoard()
+    board[0] = Field.PLAYER2
+    board[4] = Field.PLAYER2
+    board[8] = Field.PLAYER2
+    expect(won(board)).toBe(Field.PLAYER2)
   });
 });
