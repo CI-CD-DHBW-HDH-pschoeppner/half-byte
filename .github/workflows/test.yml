@@ -1,5 +1,8 @@
 name: CI testing
-on: [ push, workflow_dispatch ]
+on:
+  push:
+    branches: [ dev ]
+  workflow_dispatch:
 
 env:
   NODE_VERSION: 18.14.2
@@ -25,6 +28,9 @@ jobs:
 
       - name: Lint
         run: npm run lint
+
+      - name: Svelte check
+        run: npm run check
 
       - name: Test
         run: npm run test
