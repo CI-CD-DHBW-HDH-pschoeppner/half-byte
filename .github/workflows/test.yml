@@ -1,5 +1,8 @@
 name: CI testing
-on: [ push, workflow_dispatch ]
+on:
+  push:
+    branches: [ dev ]
+  workflow_dispatch:
 
 env:
   NODE_VERSION: 18.14.2
