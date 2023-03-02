@@ -28,6 +28,14 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Get project version
+        run: >
+          echo "PROJECT_VERSION=$(
+            npm run env | grep "^npm_package_version=" | cut -d'=' -f2
+          )" >> $GITHUB_ENV
+          && source $GITHUB_ENV
+          && echo $PROJECT_VERSION
+
       - name: Check formatting
         run: npm run format:check
 
@@ -55,4 +63,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: ghcr.io/ci-cd-dhbw-hdh-pschoeppner/half-byte/half-byte-tic-tac-toe:dev
+          tags: ghcr.io/ci-cd-dhbw-hdh-pschoeppner/half-byte/half-byte-tic-tac-toe:${{ env.PROJECT_VERSION }}
