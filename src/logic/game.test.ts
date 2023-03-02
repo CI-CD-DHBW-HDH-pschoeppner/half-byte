@@ -6,7 +6,8 @@ import {
   isPlayer,
   Mode,
   newBoard,
-  Player, won,
+  Player,
+  won,
 } from "./game";
 
 describe("invert player", () => {
@@ -143,24 +144,24 @@ describe("games switch sides", () => {
 
 describe("check won function", () => {
   it("player 1 wins", () => {
-    const board: Field[] = newBoard()
-    board[1] = Field.PLAYER1
-    board[4] = Field.PLAYER1
-    board[7] = Field.PLAYER1
-    expect(won(board)).toBe(Field.PLAYER1)
+    const board: Field[] = newBoard();
+    board[1] = Field.PLAYER1;
+    board[4] = Field.PLAYER1;
+    board[7] = Field.PLAYER1;
+    expect(won(board)).toBe(Field.PLAYER1);
   });
   it("no win", () => {
-    const board: Field[] = newBoard()
-    board[1] = Field.PLAYER1
-    board[2] = Field.PLAYER1
-    board[6] = Field.PLAYER1
-    expect(won(board)).toBe(Field.EMPTY)
+    const board: Field[] = newBoard();
+    board[1] = Field.PLAYER1;
+    board[2] = Field.PLAYER1;
+    board[6] = Field.PLAYER1;
+    expect(won(board)).toBe(Field.EMPTY);
   });
   it("player 2 wins", () => {
-    const board: Field[] = newBoard()
-    board[0] = Field.PLAYER2
-    board[4] = Field.PLAYER2
-    board[8] = Field.PLAYER2
-    expect(won(board)).toBe(Field.PLAYER2)
+    const board: Field[] = newBoard();
+    board[0] = Field.PLAYER2;
+    board[4] = Field.PLAYER2;
+    board[8] = Field.PLAYER2;
+    expect(won(board)).toBe(Field.PLAYER2);
   });
 });
