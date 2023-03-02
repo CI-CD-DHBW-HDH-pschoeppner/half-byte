@@ -164,7 +164,7 @@ export function isPlayer(player: Field): boolean {
 
 function checkPlayerWon(board: Field[], player: number): boolean {
   return winningPatterns.some((pattern) => {
-    pattern.every((field) => board[field] === player);
+    return pattern.every((field) => board[field] === player);
   });
 }
 
